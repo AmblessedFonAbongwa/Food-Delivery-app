@@ -2,6 +2,7 @@ import express from "express"
 import  cors from 'cors'
 import { connectDb } from "./config/db.js"
 import foodRouter from "./routes/foodRoutes.js"
+import userRouter from "./routes/UserRoutes.js"
 
 
 //app config 
@@ -17,7 +18,8 @@ connectDb()
 
 //api endpoints
 app.use("/api/food",foodRouter)
-app.use('images', express.static("uploads"))
+app.use('/images', express.static("uploads"))
+app.use('api/user', userRouter)
 
 app.get("/",(req,res)=>{
     res.send('it is finish')
