@@ -4,6 +4,7 @@ import { assets } from '../../assets/assets'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
+// eslint-disable-next-line react/prop-types
 const Add = ({url}) => {
     const[image,setImage]=useState(false);
     const[data,setData]=useState({

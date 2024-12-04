@@ -1,10 +1,7 @@
-import React from 'react'
 import express from 'express'
-import RegisterUser from '../controlers/userController.js'
-
+import {registerUser,loginUser} from "../controllers/userController.js"
 const userRouter =express.Router()
+userRouter.post('/register',registerUser)
+userRouter.post('/login',loginUser)
 
-userRouter.post('/register',RegisterUser)
-userRouter.post('/login')
-
-export default userRouter
+export default userRouter;

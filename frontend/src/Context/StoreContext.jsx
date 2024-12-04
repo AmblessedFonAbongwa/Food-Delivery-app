@@ -1,11 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { food_list } from "../assets/assets";
 export const StoreContext =createContext(null)
 
 const StoreContextProvider =(props)=>{
 const [cartItems,setCardItems]=useState({});
+const url='http://localhost:4000';
+const [token , setToken]=useState("")
 
  const addToCard =(itemId)=>{
      if(!cartItems[itemId]){
@@ -31,12 +33,21 @@ const [cartItems,setCardItems]=useState({});
      return totalAmount
  };
 
+    useEffect(()=>{
+if(localStorage.getItem('token')){
+setToken(localStorage.getItem('token'));
+}
+    },[])
+
      const ContextValue={
        food_list,       
        cartItems, 
        setCardItems,
        addToCard,clearFromCard,
        getTotalCartAmount,
+       token,
+       setToken,
+       url
 
      }
      return(
