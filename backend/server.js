@@ -4,7 +4,8 @@ import { connectDb } from "./config/db.js"
 import foodRouter from "./routes/foodRoutes.js"
 import userRouter from "./routes/UserRoutes.js"
 import "dotenv/config"
-
+import CartRouter from "./routes/cartRoute.js"
+import authMiddleWare from "./middleware/auth.js"
 
 //app config 
 const app=express()
@@ -21,6 +22,7 @@ connectDb()
 app.use("/api/food",foodRouter)
 app.use('/images', express.static("uploads"))
 app.use('/api/user', userRouter)
+app.use('/api/cart',CartRouter)
 
 app.get("/",(req,res)=>{
     res.send('it is finish')
