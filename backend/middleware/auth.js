@@ -14,9 +14,7 @@ try{
 
 }
 catch(error){
-console.log({success:false,message:error})
+console.log({success:false,message:'error'})
 }
-
-
 }
 export default authMiddleWare
