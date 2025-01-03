@@ -6,6 +6,7 @@ import userRouter from "./routes/UserRoutes.js"
 import "dotenv/config"
 import CartRouter from "./routes/cartRoute.js"
 import authMiddleWare from "./middleware/auth.js"
+import orderRouter from "./routes/orderRoute.js"
 
 //app config 
 const app=express()
@@ -23,6 +24,7 @@ app.use("/api/food",foodRouter)
 app.use('/images', express.static("uploads"))
 app.use('/api/user', userRouter)
 app.use('/api/cart',CartRouter)
+app.use('/api/order',orderRouter)
 
 app.get("/",(req,res)=>{
     res.send('it is finish')
