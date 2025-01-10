@@ -6,6 +6,8 @@ import Cart from "./pages/Cart/cart";
 import PlaceOrder from "./pages/placeOrder/placeOrder";
 import Footer from "./components/footer/footer";
 import LoginPop from "./components/loginpop/LoginPop";
+import  Verify  from "./pages/verify/verify";
+import MyOrders from "./pages/myorders/MyOrders";
 
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
@@ -18,6 +20,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/PlaceOrder" element={<PlaceOrder />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/myorders" element={<MyOrders/>}/>
         </Routes>
       </div>
       <Footer />

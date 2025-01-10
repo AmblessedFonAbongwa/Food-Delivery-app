@@ -2,11 +2,12 @@ import { useContext } from "react";
 import orderModel from "../modules/orderModel.js";
 import userModel from "../modules/UserModel.js";
 import Stripe from "stripe";
+import { type } from "os";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 //placing user order from frontend
 const placeOrder = async (req, res) => {
-  const frontendUrl='http://localhost:5175'
+  const frontendUrl='http://localhost:5173'
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
@@ -47,4 +48,38 @@ const placeOrder = async (req, res) => {
     
   }
 };
-export { placeOrder };
+const verifyOrder= async(req, res)=>{
+  const {orderId,success}=req.body;
+  try {
+    if(success==="true"){
+      await orderModel.findByIdAndUpdate(orderId,{payment:true}  )
+        res.json({success:true,message:"paid"})  
+    
+    }    else{
+      await orderModel.findByIdAndDelete(orderId)
+      res.json({success:false,message:"Not Paid "})
+    }
+  } catch (error) {
+   console.log(error);
+   res.json({success:false,message:error})
+   
+  }
+}
+//users orders from frontend
+
+
+const userOrders=async(req,res)=>{
+ try {
+  const orders=await orderModel.find({userId:req.body.userId})
+  res.json({success:true,data:orders})
+ } catch (error) {
+  console.log(error);
+  res.json({success:false,message:"false"})
+ }
+}
+
+
+
+
+
+export { placeOrder,verifyOrder,userOrders};
