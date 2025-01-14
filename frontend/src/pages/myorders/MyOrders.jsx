@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import './MyOrders.css'
 import { StoreContext } from '../../Context/StoreContext.jsx'
 import axios from 'axios'
-import { assert } from 'console'
 import { assets } from '../../assets/assets.js'
 
 const MyOrders = () => {
@@ -17,7 +16,6 @@ const MyOrders = () => {
         if (token) {
             fetchOrders()
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[token])
   return (
     <div className='myOrders'>
@@ -28,10 +26,16 @@ const MyOrders = () => {
             <div key={index} className="my-orders-order">
                 <img src={assets.parcel_icon} alt="" />
                 <p>{order.items.map((item,index)=>{
-                    if(index===order.item.length-1){
-                       return
+                    if(index===order.items.length-1){
+                       return item.name+ " x " + item.quantity
+                    }else{
+                        return item.name+ " x " + item.quantity + " ,"
                     }
                 })}</p>
+                <p>${order.amount}.00</p>
+                <p>items:{order.items.length}</p>
+                <p><span>&#x25cf;</span><b>{order.status}</b></p>
+                <button>Track Order</button>
             </div>
            ) })}
         </div>
