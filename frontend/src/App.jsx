@@ -8,6 +8,8 @@ import Footer from "./components/footer/footer";
 import LoginPop from "./components/loginpop/LoginPop";
 import  Verify  from "./pages/verify/verify";
 import MyOrders from "./pages/myorders/MyOrders";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [showLogin,setShowLogin]=useState(false)
@@ -15,6 +17,7 @@ const App = () => {
     <>
     {showLogin?<LoginPop setShowLogin={setShowLogin}/>:<></>}
       <div className="app">
+        <ToastContainer/>
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -1,11 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, } from 'react'
 import "./cart.css"
+import {toast} from 'react-toastify'
 import { StoreContext } from '../../Context/StoreContext'
 import { useNavigate } from 'react-router-dom'
 
 function Cart() {
-  const{cartItems,food_list,clearFromCard,getTotalCartAmount,url}=useContext(StoreContext);
+  const{cartItems,food_list,clearFromCard,getTotalCartAmount,url,token}=useContext(StoreContext);
   const navigate=useNavigate();
+  const notify=() => {
+    if (!token) {
+      toast.error('Please Add Something To Your Cart')
+    } else if (getTotalCartAmount() === 0) {
+      toast.error("Please Add An Order to your Cart")
+    }}
+    const handleCheckOut=()=>{
+        notify();
+        navigate('/placeOrder'); 
+      };
   return (
     <div className='cart'>
       <div className="cartItems">
@@ -57,7 +68,7 @@ function Cart() {
             </div>
 
           </div>         
-        <button onClick={()=>(navigate('/PlaceOrder'))}>Proceed To Checkout</button>
+        <button onClick={handleCheckOut}>Proceed To Checkout</button>
         </div>
         <div className="cart-promo-code">
           <div>

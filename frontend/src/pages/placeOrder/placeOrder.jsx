@@ -54,7 +54,9 @@ const PlaceOrder = () => {
     } else if (getTotalCartAmount() === 0) {
       navigate("/cart");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+
   return (
     <form className="place-order" onSubmit={placeOrder}>
       <div className="place-left">
@@ -158,8 +160,9 @@ const PlaceOrder = () => {
             </div>
           </div>
           <button type="submit">PROCEED TO PAYMENT</button>
-        </div>
+        </div> 
       </div>
+
     </form>
   );
 };
